@@ -25,8 +25,7 @@ public class Main extends GraphicsProgram{
 		main = this;
 		this.setSize(600,600);
 		this.setBackground(Color.BLACK);
-		player = new Player();
-		player.setLocation(300 - player.getWidth() / 2, 600 - player.getHeight());
+		player = new Player(300,600);
 		timer = new Timer((int)(delayMS*1000), new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				onTick();

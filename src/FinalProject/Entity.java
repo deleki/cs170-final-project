@@ -15,10 +15,13 @@ public abstract class Entity extends GCompound{
 	
 	private GImage image;
 	
-	public Entity(Rectangle bounds, String imageFile) {
+	private double health;
+	
+	public Entity(Rectangle bounds, String imageFile, double x, double y) {
 		image = new GImage(imageFile);
-		this.add(image);
+		this.add(image, -image.getSize().getWidth()/2, -image.getSize().getHeight()/2);
 		Main.main.addEntity(this);
+		this.setLocation(x,y);
 	}
 	public double getXVelocity() {
 		return vx;
@@ -44,6 +47,12 @@ public abstract class Entity extends GCompound{
 	public void setAcceleration(double ax, double ay) {
 		this.ax = ax;
 		this.ay = ay;
+	}
+	public double getHealth() {
+		return health;
+	}
+	public void setHealth(double health) {
+		this.health = health;
 	}
 	
 	public GRectangle hitbox() {

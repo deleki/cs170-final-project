@@ -9,15 +9,18 @@ public class Player extends Entity {
 	public static final int RIGHT = 39;
 	public static final int DOWN = 40;
 	public static final int LEFT = 37;
+	public static final int SHOOT = 32;
+	
 	private boolean upPressed = false;
 	private boolean downPressed = false;
 	private boolean rightPressed = false;
 	private boolean leftPressed = false;
+	private boolean shootPressed = false;
 
 	private KeyListener keyListener;
 
-	public Player() {
-		super(new Rectangle(200, 200), "plane.png");
+	public Player(double x, double y) {
+		super(new Rectangle(200, 200), "plane.png", x, y);
 
 		keyListener = new KeyListener() {
 
@@ -35,6 +38,8 @@ public class Player extends Entity {
 					rightPressed = true; break;
 				case LEFT:
 					leftPressed = true; break;
+				case SHOOT:
+					shootPressed = true; break;
 				}
 			}
 
@@ -49,6 +54,8 @@ public class Player extends Entity {
 					rightPressed = false; break;
 				case LEFT:
 					leftPressed = false; break;
+				case SHOOT:
+					shootPressed = false; break;
 				}
 			}
 		};
@@ -76,10 +83,12 @@ public class Player extends Entity {
 			double c = Math.sqrt(vx_ * vx_ + vy_ * vy_);
 			vx_ /= c;
 			vy_ /= c;
-			this.setVelocity(vx_ * 100, vy_ * 100);
+			this.setVelocity(vx_ * 200, vy_ * 200);
 		}
-		Projectile p = new Projectile(new Rectangle (8,8), "bullet.png", 1, Math.random()*50-25, -150-Math.random()*90);
-		p.setLocation(this.getX(), this.getY());
+		if (shootPressed) {
+		Projectile p = new Projectile(new Rectangle (8,8), "bullet.png", this.getX(), this.getY()-this.getSize().getHeight()/2 + 5, 1,
+				Math.random()*700-350, -600-Math.random()*300);
+		}
 	}
 
 }
