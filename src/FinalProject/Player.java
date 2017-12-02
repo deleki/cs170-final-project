@@ -28,13 +28,13 @@ public class Player extends Entity {
 
 				switch (e.getKeyCode()) {
 				case UP:
-					upPressed = true;
+					upPressed = true; break;
 				case DOWN:
-					downPressed = true;
+					downPressed = true; break;
 				case RIGHT:
-					rightPressed = true;
+					rightPressed = true; break;
 				case LEFT:
-					leftPressed = true;
+					leftPressed = true; break;
 				}
 			}
 
@@ -42,20 +42,20 @@ public class Player extends Entity {
 
 				switch (e.getKeyCode()) {
 				case UP:
-					upPressed = false;
+					upPressed = false; break;
 				case DOWN:
-					downPressed = false;
+					downPressed = false; break;
 				case RIGHT:
-					rightPressed = false;
+					rightPressed = false; break;
 				case LEFT:
-					leftPressed = false;
+					leftPressed = false; break;
 				}
 			}
 		};
 		Main.main.addKeyListeners(keyListener);
 	}
 
-	public void behavior() {
+	public void behavior(double delayMS) {
 		double vx_ = 0;
 		double vy_ = 0;
 		if (upPressed) {
@@ -73,12 +73,13 @@ public class Player extends Entity {
 		if (vx_ == 0 && vy_ == 0) {
 			this.setVelocity(0, 0);
 		} else {
-			/*double c = Math.sqrt(vx_ * vx_ + vy_ * vy_);
+			double c = Math.sqrt(vx_ * vx_ + vy_ * vy_);
 			vx_ /= c;
-			vy_ /= c;*/
-
+			vy_ /= c;
 			this.setVelocity(vx_ * 100, vy_ * 100);
 		}
+		Projectile p = new Projectile(new Rectangle (8,8), "bullet.png", 1, Math.random()*50-25, -150-Math.random()*90);
+		p.setLocation(this.getX(), this.getY());
 	}
 
 }
