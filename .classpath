@@ -2,5 +2,8 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/Users/Randy/Documents/Java Packages/acm.toys.jar"/>
+	<classpathentry kind="lib" path="/Users/Randy/Documents/Java Packages/acm.breadboards.jar"/>
+	<classpathentry kind="lib" path="/Users/Randy/Documents/Java Packages/acm.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
