@@ -18,6 +18,7 @@ public abstract class Entity extends GCompound{
 	public Entity(Rectangle bounds, String imageFile) {
 		image = new GImage(imageFile);
 		this.add(image);
+		Main.main.addEntity(this);
 	}
 	public double getXVelocity() {
 		return vx;
@@ -53,10 +54,14 @@ public abstract class Entity extends GCompound{
 		this.move(vx*delayMS, vy*delayMS);
 		vx += ax*delayMS;
 		vy += ay*delayMS;
-		this.behavior();
-		System.out.println(vx);
+		this.behavior(delayMS);
+	}
+
+
+	public void destroy() {
+		Main.main.removeEntity(this);
 	}
 	
-	public abstract void behavior();
+	public abstract void behavior(double delayMS);
 	
 }
