@@ -17,12 +17,30 @@ public abstract class Entity extends GCompound{
 	
 	private double health;
 	
-	public Entity(Rectangle bounds, String imageFile, double x, double y) {
+	private boolean friendly;
+
+	public static final int PLAYER = 0, ENEMY = 1, PROJECTILE = 2;
+	private int typeHint;
+	
+	public Entity(Rectangle bounds, String imageFile, double x, double y, boolean friendly, int typeHint) {
 		image = new GImage(imageFile);
-		this.add(image, -image.getSize().getWidth()/2, -image.getSize().getHeight()/2);
+		this.add(image, -image.getSize().getWidth()/2, -image.getSize().getHeight()/2); 
+		
+		this.friendly = friendly;
+		this.typeHint = typeHint;
+		
 		Main.main.addEntity(this);
 		this.setLocation(x,y);
 	}
+	
+	public boolean isFriendly() {
+		return friendly;
+	}
+	
+	public int getTypeHint() {
+		return typeHint;
+	}
+	
 	public double getXVelocity() {
 		return vx;
 	}
@@ -56,6 +74,7 @@ public abstract class Entity extends GCompound{
 	}
 	
 	public GRectangle hitbox() {
+		// System.out.println(this.getBounds().getX() + " " + this.getBounds().getY() + " " + this.getBounds().getWidth() + " " + this.getBounds().getHeight());
 		return this.getBounds();
 	}
 	

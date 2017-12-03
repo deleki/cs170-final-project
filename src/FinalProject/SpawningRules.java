@@ -4,26 +4,23 @@ import java.awt.Rectangle;
 import java.util.Random;
 
 public class SpawningRules {
-	static double x;
-	static double y;
-	static double dx;
-	static double dy;
-	static double health = 10;
-	static int numEnemies;
-	static Random random;
-	static BasicEnemy basicEnemies;
-
-	public static void spawnBasicEnemies() {
-	random = new Random();
-	numEnemies = random.nextInt(6);
+	static Random random = new Random();
 	
-	x = random.nextInt(Main.SCREEN_WIDTH);
-	y = random.nextInt(Main.SCREEN_HEIGHT);
-	dx = Math.random();
-	dy = Math.random();
-	 for(int i = 0; i < numEnemies; i++) {
-		basicEnemies = new BasicEnemy(new Rectangle (50,50), "basicEnemy.png", x, y, dx,dy, health);
-		 	Main.main.addEntity(basicEnemies);  
-	 	}
-	}
+	// spawns basic enemies in a line
+	public static void spawnEnemiesInLine() {
+        random = new Random();
+        int numEnemies = random.nextInt(6);
+
+        double x = random.nextInt(Main.SCREEN_WIDTH);
+        double y = -random.nextInt(300);
+        double dx = Math.random()*50+50;
+        double dy = Math.random()*50+50;
+        
+        double health = 10;
+        for (int i = 0; i < numEnemies; i++) {
+            new BasicEnemy(new Rectangle(50, 50), "basicEnemy.png", x-i*dx, y-i*dy, health);
+        }
+    }
+	
+	
 }

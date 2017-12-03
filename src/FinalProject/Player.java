@@ -10,7 +10,7 @@ public class Player extends Entity {
 	public static final int DOWN = 40;
 	public static final int LEFT = 37;
 	public static final int SHOOT = 32;
-	
+
 	private boolean upPressed = false;
 	private boolean downPressed = false;
 	private boolean rightPressed = false;
@@ -20,7 +20,8 @@ public class Player extends Entity {
 	private KeyListener keyListener;
 
 	public Player(double x, double y) {
-		super(new Rectangle(200, 200), "plane.png", x, y);
+		super(new Rectangle(100, 100), "plane.png", x, y, true, PLAYER);
+		this.setHealth(3);
 
 		keyListener = new KeyListener() {
 
@@ -30,16 +31,21 @@ public class Player extends Entity {
 			public void keyPressed(KeyEvent e) {
 
 				switch (e.getKeyCode()) {
-				case UP:
-					upPressed = true; break;
+				/*case UP:
+					upPressed = true;
+					break;
 				case DOWN:
-					downPressed = true; break;
+					downPressed = true;
+					break;*/
 				case RIGHT:
-					rightPressed = true; break;
+					rightPressed = true;
+					break;
 				case LEFT:
-					leftPressed = true; break;
+					leftPressed = true;
+					break;
 				case SHOOT:
-					shootPressed = true; break;
+					shootPressed = true;
+					break;
 				}
 			}
 
@@ -47,15 +53,20 @@ public class Player extends Entity {
 
 				switch (e.getKeyCode()) {
 				case UP:
-					upPressed = false; break;
+					upPressed = false;
+					break;
 				case DOWN:
-					downPressed = false; break;
+					downPressed = false;
+					break;
 				case RIGHT:
-					rightPressed = false; break;
+					rightPressed = false;
+					break;
 				case LEFT:
-					leftPressed = false; break;
+					leftPressed = false;
+					break;
 				case SHOOT:
-					shootPressed = false; break;
+					shootPressed = false;
+					break;
 				}
 			}
 		};
@@ -86,8 +97,13 @@ public class Player extends Entity {
 			this.setVelocity(vx_ * 200, vy_ * 200);
 		}
 		if (shootPressed) {
-		Projectile p = new Projectile(new Rectangle (8,8), "bullet.png", this.getX(), this.getY()-this.getSize().getHeight()/2 + 5, 1,
-				Math.random()*700-350, -600-Math.random()*300);
+			new Projectile(new Rectangle(8, 8), "bullet.png", this.getX(),
+					this.getY() - this.getSize().getHeight() / 2 + 5, true, 1, Math.random() * 700 - 350,
+					-600 - Math.random() * 300);
+		}
+		
+		if (this.getHealth() ==0) {
+			this.destroy();
 		}
 	}
 
