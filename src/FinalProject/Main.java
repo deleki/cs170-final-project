@@ -65,10 +65,11 @@ public class Main extends GraphicsProgram{
 			e.update(delayMS);
 		}
 		
-		System.out.println(time);
+		//System.out.println(time);
 		time++;
+		
 		if (time%50 == 0) {
-			spawn.spawnBasicEnemies();
+			SpawningRules.spawnBasicEnemies();
 		}
 		
 		if (time > 1000000) {
