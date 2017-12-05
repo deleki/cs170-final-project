@@ -22,7 +22,7 @@ public abstract class Entity extends GCompound{
 	public static final int PLAYER = 0, ENEMY = 1, PROJECTILE = 2;
 	private int typeHint;
 	
-	public Entity(Rectangle bounds, String imageFile, double x, double y, boolean friendly, int typeHint) {
+	public Entity(String imageFile, double x, double y, boolean friendly, int typeHint) {
 		image = new GImage(imageFile);
 		this.add(image, -image.getSize().getWidth()/2, -image.getSize().getHeight()/2); 
 		

@@ -9,10 +9,11 @@ public class Boss extends Entity {
 	boolean isInScreen = false;
 	Random random;
 	boolean bossStatus;
+	public static final int HEALTH = 1500;
 	//int shotType=0;  //test to see if random shotType or structured shotType feels better gameplay wise
 
-	public Boss(Rectangle bounds, String imageFile, double x, double y, int health) {
-		super(bounds, imageFile, x, y, false, ENEMY);
+	public Boss(String imageFile, double x, double y, int health) {
+		super(imageFile, x, y, false, ENEMY);
 		this.setHealth(health);
 		this.setVelocity(0, 50);
 		bossStatus = true;
@@ -60,20 +61,20 @@ public class Boss extends Entity {
 	}
 
 	public void spreadshot() {
-		new Projectile(new Rectangle(8, 8), "enemyBullet.png", this.getX(),
+		new Projectile("enemyBullet.png", this.getX(),
 				this.getY() + this.getSize().getHeight() / 2 - 5, false, 2, 0, Main.SCREEN_HEIGHT / 2);
-		new Projectile(new Rectangle(8, 8), "enemyBullet.png", this.getX(),
+		new Projectile("enemyBullet.png", this.getX(),
 				this.getY() + this.getSize().getHeight() / 2 - 5, false, 2, Main.SCREEN_WIDTH / 1.5, Main.SCREEN_HEIGHT / 2);
-		new Projectile(new Rectangle(8, 8), "enemyBullet.png", this.getX(),
+		new Projectile("enemyBullet.png", this.getX(),
 				this.getY() + this.getSize().getHeight() / 2 - 5, false, 2, -Main.SCREEN_WIDTH / 1.5, Main.SCREEN_HEIGHT / 2);
-		new Projectile(new Rectangle(8, 8), "enemyBullet.png", this.getX(),
+		new Projectile("enemyBullet.png", this.getX(),
 				this.getY() + this.getSize().getHeight() / 2 - 5, false, 2, Main.SCREEN_WIDTH / 3, Main.SCREEN_HEIGHT / 2);
-		new Projectile(new Rectangle(8, 8), "enemyBullet.png", this.getX(),
+		new Projectile("enemyBullet.png", this.getX(),
 				this.getY() + this.getSize().getHeight() / 2 - 5, false, 2, -Main.SCREEN_WIDTH / 3, Main.SCREEN_HEIGHT / 2);
 	}
 	
 	public void cannonfire() {
-		new Projectile(new Rectangle(150, 150), "cannonball.png", this.getX(),
+		new Projectile("cannonball.png", this.getX(),
 				this.getY() + this.getSize().getHeight() / 2 -5, false, 5, Math.random() * 150 - 75,
 				150 - Math.random() * 75);
 	}
@@ -82,7 +83,7 @@ public class Boss extends Entity {
 		random = new Random();
 		double x = random.nextInt(Main.SCREEN_WIDTH - 100) + 100;
 		for (int i=0; i < 20; i ++) {
-			new Projectile(new Rectangle(8, 8), "enemyBullet.png", x,
+			new Projectile("enemyBullet.png", x,
 					this.getY() + this.getSize().getHeight() / 2 -5, false, 3, Math.random() * 50 - 25,
 					200 - Math.random() * 100);
 		}

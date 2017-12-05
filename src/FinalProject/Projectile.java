@@ -6,8 +6,8 @@ public class Projectile extends Entity {
 	
 	double lifespan;
 
-	public Projectile(Rectangle bounds, String imageFile, double x, double y, boolean friendly, double lifespan, double vx, double vy) {
-		super(bounds, imageFile, x, y, friendly, PROJECTILE);
+	public Projectile(String imageFile, double x, double y, boolean friendly, double lifespan, double vx, double vy) {
+		super(imageFile, x, y, friendly, PROJECTILE);
 		this.setVelocity(vx, vy);
 		this.lifespan = lifespan;
 	}

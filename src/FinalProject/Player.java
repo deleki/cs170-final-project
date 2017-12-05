@@ -20,7 +20,7 @@ public class Player extends Entity {
 	private KeyListener keyListener;
 
 	public Player(double x, double y) {
-		super(new Rectangle(100, 100), "plane.png", x, y, true, PLAYER);
+		super("plane.png", x, y, true, PLAYER);
 		this.setHealth(3);
 
 		keyListener = new KeyListener() {
@@ -88,6 +88,22 @@ public class Player extends Entity {
 		if (leftPressed) {
 			vx_ -= 1;
 		}
+		
+		if (this.getY() < 0) {
+			vx_ += 1;
+		}
+		if (this.getY()> Main.SCREEN_HEIGHT) {
+			vy_ -= 1;
+		}
+		if (this.getX() >Main.SCREEN_WIDTH) {
+			vx_ -= 1;
+		}
+		if (this.getX()<0) {
+			vx_ +=1;
+		}
+		
+		
+		
 		if (vx_ == 0 && vy_ == 0) {
 			this.setVelocity(0, 0);
 		} else {
@@ -97,7 +113,7 @@ public class Player extends Entity {
 			this.setVelocity(vx_ * 200, vy_ * 200);
 		}
 		if (shootPressed) {
-			new Projectile(new Rectangle(8, 8), "bullet.png", this.getX(),
+			new Projectile("bullet.png", this.getX(),
 					this.getY() - this.getSize().getHeight() / 2 + 5, true, 1, Math.random() * 700 - 350,
 					-600 - Math.random() * 300);
 		}

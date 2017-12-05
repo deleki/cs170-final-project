@@ -6,8 +6,8 @@ public class BasicEnemy extends Entity {
 	
 	int shootingDelay=0;
 
-	public BasicEnemy(Rectangle bounds, String imageFile, double x, double y, int health) {
-        super(bounds, imageFile, x, y, false, ENEMY);
+	public BasicEnemy(String imageFile, double x, double y, int health) {
+        super(imageFile, x, y, false, ENEMY);
         this.setHealth(health);
         this.setVelocity(Math.random()*100-50, 100);
     }
@@ -23,7 +23,7 @@ public class BasicEnemy extends Entity {
 		shootingDelay++;
 		
 		if (shootingDelay%200 == 0) {
-			new Projectile(new Rectangle(8, 8), "enemyBullet.png", this.getX(),
+			new Projectile("enemyBullet.png", this.getX(),
 					this.getY() + this.getSize().getHeight() / 2 -5, false, 3, Math.random() * 350 - 125,
 					300 - Math.random() * 150);
 		}

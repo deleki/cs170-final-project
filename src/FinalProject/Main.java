@@ -60,8 +60,15 @@ public class Main extends GraphicsProgram{
         });
         timer.start();
 
-		
 		collisionManager = new CollisionManager();
+		
+		playerHealth = new GLabel(""+player.getHealth(),SCREEN_WIDTH - 100,SCREEN_HEIGHT - 100);
+        playerHealth.setColor(Color.WHITE);
+        this.add(playerHealth);
+        
+        defeatedEnemyCount = new GLabel("Boss spawns in: "+(THRESHOLD-enemiesDefeated),50,SCREEN_HEIGHT-100);
+		defeatedEnemyCount.setColor(Color.WHITE);
+		this.add(defeatedEnemyCount);
 	}
 	
 	public void addEntity(Entity e) {
@@ -109,22 +116,14 @@ public class Main extends GraphicsProgram{
         //System.out.println(enemiesDefeated);
         time++;
         
-        if (time%50 == 0 && enemiesDefeated < THRESHOLD) {
-            SpawningRules.spawnEnemiesInLine();
+        if ((time%50 == 0 && enemiesDefeated < THRESHOLD) || (bossSpawned == true && boss.getHealth() < (boss.HEALTH/2) && time%100 == 0)) {
+            SpawningRules.chooseRandomSpawningRule();
         } 
-        else {
-        		;
-        }
         
         if (enemiesDefeated >= THRESHOLD && bossSpawned == false) {
         		SpawningRules.spawnBoss();
         		bossSpawned = true;
         }
-        
-        if (time > 1000000) {
-            time = 0;
-        }
-        
         
         main.trackPlayerHealth();
         main.trackEnemiesDefeated();
@@ -152,15 +151,14 @@ public class Main extends GraphicsProgram{
 	}
 	
 	public void trackPlayerHealth() {
-		playerHealth = new GLabel(""+player.getHealth(),SCREEN_WIDTH - 100,SCREEN_HEIGHT - 100);
-        playerHealth.setColor(Color.WHITE);
-        this.add(playerHealth);
+		playerHealth.setLabel(""+player.getHealth());
 	}
 	
 	public void trackEnemiesDefeated() {
-		defeatedEnemyCount = new GLabel("Boss spawns in: "+(THRESHOLD-enemiesDefeated),50,SCREEN_HEIGHT-100);
-		defeatedEnemyCount.setColor(Color.WHITE);
-		this.add(defeatedEnemyCount);
+		defeatedEnemyCount.setLabel("Boss spawns in: "+(THRESHOLD-enemiesDefeated));
+		if (enemiesDefeated > THRESHOLD) {
+			this.remove(defeatedEnemyCount);
+		}
 	}
 	
 }
