@@ -12,19 +12,23 @@ public class CollisionManager {
 			for (Entity e2 : unfriendlyEntities) {
 
 				if (e1.hitbox().intersects(e2.hitbox())) {
-					if (e1.getTypeHint() == Entity.PLAYER && e2.getTypeHint() == Entity.ENEMY) {
-						// enemy does damage to player and enemy explodes, or something.
-						e1.setHealth(e1.getHealth()-1);
+					if (e1.getTypeHint() == Entity.PLAYER && e2.getTypeHint() == Entity.ENEMY && e2.bossStatus == false) {
+						// enemy does damage to player and enemy explodes
+						e1.setHealth(e1.getHealth() - 1);
 						e2.destroy();
-						
-					} else if (e1.getTypeHint() == Entity.PLAYER && e2.getTypeHint() == Entity.PROJECTILE) {
-						// the projectile does damage to the player and despawns, calling e2.damage(e1)
+
+					} else if(e1.getTypeHint() == Entity.PLAYER && e2.getTypeHint() == Entity.ENEMY && e2.bossStatus == true) {
+						//don't ram into the boss.
+						e1.setHealth(e1.getHealth() - 1);
+					}
+						else if (e1.getTypeHint() == Entity.PLAYER && e2.getTypeHint() == Entity.PROJECTILE) {
+						// the projectile does damage to the player and despawns
 						e2.destroy();
-						e1.setHealth(e1.getHealth()-1);
+						e1.setHealth(e1.getHealth() - 1);
 					} else if (e1.getTypeHint() == Entity.PROJECTILE && e2.getTypeHint() == Entity.ENEMY) {
-						// the projectile does damage to the enemy, calling e1.damage(e2)
+						// player projectile does damage to the enemy
 						e1.destroy();
-						e2.setHealth(e2.getHealth()-1);
+						e2.setHealth(e2.getHealth() - 1);
 					}
 				}
 			}

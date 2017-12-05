@@ -4,6 +4,8 @@ import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import acm.graphics.GRectangle;
+
 public class Player extends Entity {
 	public static final int UP = 38;
 	public static final int RIGHT = 39;
@@ -73,6 +75,13 @@ public class Player extends Entity {
 		Main.main.addKeyListeners(keyListener);
 	}
 
+	public GRectangle hitbox() {
+		GRectangle rect = new GRectangle(this.getX() - this.getWidth() / 5, this.getY() - this.getHeight() / 5,
+				this.getWidth() / 2.5, this.getHeight() / 2.5);
+		return rect;
+	} // this sets the hitbox to be smaller than the image of the plane. This is done
+		// to make the player experience better.
+
 	public void behavior(double delayMS) {
 		double vx_ = 0;
 		double vy_ = 0;
@@ -88,22 +97,20 @@ public class Player extends Entity {
 		if (leftPressed) {
 			vx_ -= 1;
 		}
-		
+
 		if (this.getY() < 0) {
-			vx_ += 1;
+			vy_ += 1;
 		}
-		if (this.getY()> Main.SCREEN_HEIGHT) {
+		if (this.getY() > Main.SCREEN_HEIGHT) {
 			vy_ -= 1;
 		}
-		if (this.getX() >Main.SCREEN_WIDTH) {
+		if (this.getX() > Main.SCREEN_WIDTH) {
 			vx_ -= 1;
 		}
-		if (this.getX()<0) {
-			vx_ +=1;
+		if (this.getX() < 0) {
+			vx_ += 1;
 		}
-		
-		
-		
+
 		if (vx_ == 0 && vy_ == 0) {
 			this.setVelocity(0, 0);
 		} else {
@@ -113,11 +120,10 @@ public class Player extends Entity {
 			this.setVelocity(vx_ * 200, vy_ * 200);
 		}
 		if (shootPressed) {
-			new Projectile("bullet.png", this.getX(),
-					this.getY() - this.getSize().getHeight() / 2 + 5, true, 1, Math.random() * 700 - 350,
-					-600 - Math.random() * 300);
+			new Projectile("bullet.png", this.getX(), this.getY() - this.getSize().getHeight() / 2 + 5, true, 1,
+					Math.random() * 700 - 350, -600 - Math.random() * 300);
 		}
-		
+
 		if (this.getHealth() <= 0) {
 			this.destroy();
 		}

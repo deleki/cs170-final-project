@@ -3,7 +3,7 @@ package FinalProject;
 import java.awt.Rectangle;
 
 public class Projectile extends Entity {
-	
+
 	double lifespan;
 
 	public Projectile(String imageFile, double x, double y, boolean friendly, double lifespan, double vx, double vy) {
@@ -11,7 +11,6 @@ public class Projectile extends Entity {
 		this.setVelocity(vx, vy);
 		this.lifespan = lifespan;
 	}
-	
 
 	public void behavior(double delayMS) {
 		lifespan -= delayMS;
@@ -22,5 +21,5 @@ public class Projectile extends Entity {
 			this.destroy();
 		}
 	}
-	
+
 }
