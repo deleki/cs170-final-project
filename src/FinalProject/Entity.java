@@ -15,7 +15,7 @@ public abstract class Entity extends GCompound{
 	
 	private GImage image;
 	
-	private double health;
+	private int health;
 	
 	private boolean friendly;
 
@@ -66,10 +66,11 @@ public abstract class Entity extends GCompound{
 		this.ax = ax;
 		this.ay = ay;
 	}
-	public double getHealth() {
+	public int getHealth() {
 		return health;
 	}
-	public void setHealth(double health) {
+	
+	public void setHealth(int health) {
 		this.health = health;
 	}
 	

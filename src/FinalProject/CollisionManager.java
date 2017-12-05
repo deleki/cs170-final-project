@@ -14,6 +14,8 @@ public class CollisionManager {
 				if (e1.hitbox().intersects(e2.hitbox())) {
 					if (e1.getTypeHint() == Entity.PLAYER && e2.getTypeHint() == Entity.ENEMY) {
 						// enemy does damage to player and enemy explodes, or something.
+						e1.setHealth(e1.getHealth()-1);
+						e2.destroy();
 						
 					} else if (e1.getTypeHint() == Entity.PLAYER && e2.getTypeHint() == Entity.PROJECTILE) {
 						// the projectile does damage to the player and despawns, calling e2.damage(e1)

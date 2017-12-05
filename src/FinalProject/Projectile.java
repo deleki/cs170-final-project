@@ -11,11 +11,14 @@ public class Projectile extends Entity {
 		this.setVelocity(vx, vy);
 		this.lifespan = lifespan;
 	}
-
+	
 
 	public void behavior(double delayMS) {
 		lifespan -= delayMS;
 		if (lifespan <= 0) {
+			this.destroy();
+		}
+		if (this.getX() > Main.SCREEN_WIDTH || this.getX() < 0 || this.getY() > Main.SCREEN_HEIGHT || this.getY() < 0) {
 			this.destroy();
 		}
 	}

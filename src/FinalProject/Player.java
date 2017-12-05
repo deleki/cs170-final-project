@@ -31,12 +31,12 @@ public class Player extends Entity {
 			public void keyPressed(KeyEvent e) {
 
 				switch (e.getKeyCode()) {
-				/*case UP:
+				case UP:
 					upPressed = true;
 					break;
 				case DOWN:
 					downPressed = true;
-					break;*/
+					break;
 				case RIGHT:
 					rightPressed = true;
 					break;
@@ -102,7 +102,7 @@ public class Player extends Entity {
 					-600 - Math.random() * 300);
 		}
 		
-		if (this.getHealth() ==0) {
+		if (this.getHealth() <= 0) {
 			this.destroy();
 		}
 	}
